@@ -1,6 +1,7 @@
-const logger = require("./logger");
+const log = require("./logger");
 
 //to keep the  terminal clear
 console.clear();
 // logger = 1;
-logger.log("Hello there");
+
+log("Hello there");

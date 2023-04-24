@@ -1,18 +1,12 @@
+const EventEmitter = require("events");
+
 var url = "http://mylogger.io/log";
 
-// console.log("File", __filename);
-// console.log("Dir", __dirname);
-// console.log("Mod", module);
-console.table([
-  { a: 1, b: "Y" },
-  { a: "Z", b: 2 },
-  { a: "Z", b: 5 },
-  { a: "Z" },
-  { b: 5 },
-]);
-
-function log(message) {
-  console.log(message);
+class Logger extends EventEmitter {
+  log(message) {
+    console.log(message);
+    this.emit("Event", { id: 1, url: url });
+  }
 }
 
-module.exports = log;
+module.exports = Logger;

@@ -19,17 +19,35 @@ const bToGb = Math.pow(10, 9);
 
 // //File System
 // const fs = require("node:fs");
-// // console.log(fs.readdirSync("./"));
-// fs.readdir("./", function (err, files) {
+// fs.readdir("./", (err, files) => {
 //   if (err) console.log("Error ", err);
 //   else console.log("Files ", files);
 // });
 
-const EventEmitter = require("events");
-const emmiter = new EventEmitter();
+// //Events
+// const EventEmitter = require("events");
+// const Logger = require("./logger");
+// const logger = new Logger();
+// //Regustering a listener
+// logger.on("Event", (arg) => {
+//   console.log("Event listener called", arg);
+// });
+// logger.log("Hello There");
 
-emmiter.on("Event", function () {
-  console.log("Hello there");
+//HTTP
+
+const http = require("http");
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.write("Hello there");
+    res.end();
+  }
+
+  if (req.url === "/api/courses") {
+    res.write(JSON.stringify([1, 2, 3, 4]));
+    res.end();
+  }
 });
-//Emmiter
-emmiter.emit("Event");
+
+server.listen(2023);
+console.log("Listening on port 2023");

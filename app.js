@@ -13,7 +13,8 @@ const bToGb = Math.pow(10, 9);
 
 // //OS
 // const OS = require("os");
-// console.log(OS.hostname().includes("lenovo") ? "This is Lenovo" : "Not lenovo");
+// console.log(OS.hostname());
+// console.log(OS.platform());
 // console.log("Free Memory in Gb-", OS.freemem() / bToGb);
 // console.log("Total Memory in Gb-", OS.totalmem() / bToGb);
 
@@ -25,17 +26,25 @@ const bToGb = Math.pow(10, 9);
 // });
 
 // //Events
-// const EventEmitter = require("events");
+// const EventEmitter = require("events"); //not needed now because new inported class is child of Emmiter
 // const Logger = require("./logger");
 // const logger = new Logger();
 // //Regustering a listener
 // logger.on("Event", (arg) => {
 //   console.log("Event listener called", arg);
 // });
+// Logger.log2("Message 2"); //Fn Outside Emmiter Child
 // logger.log("Hello There");
 
-//HTTP
+// //Event Emmiter
+// const EventEmitter = require("events");
+// const emmiter = new EventEmitter();
+// console.log(emmiter);
 
+const PORT = 3000;
+const OS = require("os");
+
+//HTTP
 const http = require("http");
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
@@ -43,11 +52,15 @@ const server = http.createServer((req, res) => {
     res.end();
   }
 
-  if (req.url === "/api/courses") {
-    res.write(JSON.stringify([1, 2, 3, 4]));
+  if (req.url === "/api/cpu") {
+    res.write(JSON.stringify(OS.cpus()));
     res.end();
   }
 });
 
-server.listen(2023);
-console.log("Listening on port 2023");
+// server.on("connection", (socket) => {
+//   console.log(`New Connection...`);
+// });
+
+server.listen(PORT);
+console.log(`Listening on port ${PORT}...`);

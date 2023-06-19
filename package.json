@@ -8,7 +8,7 @@
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ankit Singh Chouhan",
   "license": "ISC",
   "dependencies": {
     "jshint": "^2.13.6",

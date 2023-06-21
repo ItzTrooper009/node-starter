@@ -44,23 +44,33 @@ const bToGb = Math.pow(10, 9);
 const PORT = 3000;
 const OS = require("os");
 
-//HTTP
-const http = require("http");
-const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    res.write("Hello there");
-    res.end();
-  }
+// //HTTP
+// const http = require("http");
+// const server = http.createServer((req, res) => {
+//   if (req.url === "/") {
+//     res.write("Hello there");
+//     res.end();
+//   }
 
-  if (req.url === "/api/cpu") {
-    res.write(JSON.stringify(OS.cpus()));
-    res.end();
-  }
+//   if (req.url === "/api/cpu") {
+//     res.write(JSON.stringify(OS.cpus()));
+//     res.end();
+//   }
+// });
+
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello There");
+});
+
+app.get("/api/cpu", (req, res) => {
+  res.send(OS.cpus());
 });
 
 // server.on("connection", (socket) => {
 //   console.log(`New Connection...`);
 // });
 
-server.listen(PORT);
-console.log(`Listening on port ${PORT}...`);
+app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
